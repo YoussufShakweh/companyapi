@@ -51,4 +51,4 @@ The Company Database API allows users to interact with company-related data. It 
 	```python
 	python manage.py runserver
 	```
-3. Access the API endpoints via **http://localhost:8000/company/**
+3. Access the API endpoints via **http://localhost:8000**
