@@ -54,7 +54,8 @@ The Company Database API allows users to interact with company-related data. It 
 3. Access the API endpoints via **http://localhost:8000**
 
 ## API Endpoints
-### Employees
+
+### Employee
 - **GET /company/employees/:** Retrieve a list of all employees.
 - **GET /company/employees/{employee_id}/:** Retrieve details of a specific employee.
 - **POST /company/employees/:** Add a new employee to the database.
