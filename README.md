@@ -24,3 +24,11 @@ The Company Database API allows users to interact with company-related data. It 
   - Associate dependents with employees.
   - Retrieve dependent details for a specific employee.
   - Update dependent information.
+
+## Installation
+1. Clone this repository to your local machine:
+	```bash
+	git clone https://github.com/YoussufShakweh/companyapi.git
+	cd companyapi
+	```
+	
