@@ -72,6 +72,12 @@ The Company Database API allows users to interact with company-related data. It 
 
 **Note: A department can be deleted only when there are no working employees within it.**
 
+### Dependent
+- **GET /company/employees/{employee_id}/dependents/:** Retrieve a list of all dependents to this employee.
+- **GET /company/employees/{employee_id}/dependents/{dependent_id}/:** Retrieve details of a specific dependent.
+- **POST /company/employees/{employee_id}/dependents/:** Add new dependent to this employee.
+- **PUT /company/employees/{employee_id}/dependents/{dependent_id}/:** Update an existing dependent details.
+- **DELETE /company/employees/{employee_id}/dependents/{dependent_id}:** Delete a dependent.
 ## Contributing
 Contributions are welcome! If you find any issues or want to enhance the API, feel free to submit a pull request.
 
