@@ -27,8 +27,17 @@ The Company Database API allows users to interact with company-related data. It 
 
 ## Installation
 1. Clone this repository to your local machine:
-	```bash
+	```
 	git clone https://github.com/YoussufShakweh/companyapi.git
 	cd companyapi
 	```
-	
+2. Create a Virtual Environment and activate it:
+	```
+	virtualenv venv
+	source venv/bin/activate
+	```
+3. Install the necessary dependencies (e.g., Python, Django, DRF) using this command:
+	```python
+	pip3 install -r requirements.txt
+	```
+4. Set up your database (e.g., PostgreSQL, MySQL) and configure Django accordingly.
