@@ -63,7 +63,9 @@ The Company Database API allows users to interact with company-related data. It 
 - **DELETE /company/employees/{employee_id}/:** Delete an employee from the database.
 
 **Note: When you delete an employee from the database, his dependents will also be deleted.**
-__
+
+____
+
 ### Department
 - **GET /company/departments/:** Retrieve a list of all departments.
 - **GET /company/departments/{department_id}/:** Retrieve details of a specific department.
@@ -72,7 +74,9 @@ __
 - **DELETE /company/departments/{department_id}/:** Delete a department.
 
 **Note: A department can be deleted only when there are no working employees within it.**
-__
+
+____
+
 ### Dependent
 - **GET /company/employees/{employee_id}/dependents/:** Retrieve a list of all dependents to this employee.
 - **GET /company/employees/{employee_id}/dependents/{dependent_id}/:** Retrieve details of a specific dependent.
