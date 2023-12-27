@@ -16,3 +16,12 @@ The Company Database API allows users to interact with company-related data. It 
   - Search for employees based on criteria (e.g., department, age).
   - Add new employees to the database.
   - Update employee records (e.g., salary, first_name, last_name).
+- Department Management:
+  - List all departments.
+  - View department details.
+  - Create new departments.
+- Dependent Records:
+  - Associate dependents with employees.
+  - Retrieve dependent details for a specific employee.
+  - Update dependent information.
+  - 
