@@ -9,3 +9,10 @@ The Company Database API allows users to interact with company-related data. It 
 3. Dependents: Track dependents associated with employees (family members).
 
 **Currently these entities implemented in the future I will implement the rest.**
+
+## Feature
+- Employee Information:
+  - Retrieve employee details by ID.
+  - Search for employees based on criteria (e.g., department, age).
+  - Add new employees to the database.
+  - Update employee records (e.g., salary, first_name, last_name).
