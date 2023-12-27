@@ -34,7 +34,7 @@ The Company Database API allows users to interact with company-related data. It 
 2. Create a Virtual Environment and activate it:
 	```
 	virtualenv venv
-	source venv/bin/python3
+	source venv/bin/activate
 	```
 3. Install the necessary dependencies (e.g., Python, Django, DRF) using this command:
 	```python
