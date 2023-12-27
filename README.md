@@ -41,3 +41,14 @@ The Company Database API allows users to interact with company-related data. It 
 	pip3 install -r requirements.txt
 	```
 4. Set up your database (e.g., PostgreSQL, MySQL) and configure Django accordingly.
+
+## Usage
+1. Run migrations to create the database schema:
+	```python
+	python manage.py migrate
+	```
+2. Start the development server:
+	```python
+	python manage.py runserver
+	```
+3. Access the API endpoints via **http://localhost:8000/company/**
