@@ -7,3 +7,4 @@ The Company Database API allows users to interact with company-related data. It 
 1. Departments: Handle department information, including department names.
 2. Employees: Manage employee records, including details such as first name, last name, email, salary, and department.
 3. Dependents: Track dependents associated with employees (family members).
+**Currently these entities implemented in the future I will implement the rest.**
