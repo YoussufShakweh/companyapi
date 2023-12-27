@@ -52,3 +52,15 @@ The Company Database API allows users to interact with company-related data. It 
 	python manage.py runserver
 	```
 3. Access the API endpoints via **http://localhost:8000**
+
+## API Endpoints
+
+## Contributing
+Contributions are welcome! If you find any issues or want to enhance the API, feel free to submit a pull request.
+
+## Credits
+- **Ramez Elmasri**: Author of the book that inspired this project.
+- **Youssuf Shakweh**: Creator of this API.
+
+## License
+This project is licensed under the **MIT license** - see the LICENSE file for details. 
