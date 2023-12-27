@@ -60,6 +60,7 @@ The Company Database API allows users to interact with company-related data. It 
 - **POST /company/employees/:** Add a new employee to the database.
 - **PUT /company/employees/{employee_id}/:** Update an existing employee's information.
 - **DELETE /company/employees/{employee_id}/:** Delete an employee from the database.
+
 **Note: When you delete an employee from the database, his dependents will also be deleted.**
 
 ### Department
@@ -68,6 +69,7 @@ The Company Database API allows users to interact with company-related data. It 
 - **POST /company/departments/:** Create a new department.
 - **PUT /company/departments/{department_id}/:** Update department details.
 - **DELETE /company/departments/{department_id}/:** Delete a department.
+
 **Note: A department can be deleted only when there are no working employees within it.**
 
 ## Contributing
