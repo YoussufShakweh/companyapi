@@ -4,6 +4,6 @@ This repository contains an API for the Company Database, built using the **Djan
 ## Overview
 The Company Database API allows users to interact with company-related data. It provides endpoints for querying, adding, updating, and deleting information related to:
 
-1. Departments: Handle department information, including department names and locations.
+1. Departments: Handle department information, including department names.
 2. Employees: Manage employee records, including details such as first name, last name, email, salary, and department.
 3. Dependents: Track dependents associated with employees (family members).
