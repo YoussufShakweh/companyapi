@@ -79,7 +79,7 @@ The Company Database API allows users to interact with company-related data. It 
  	]
  	```
 - **GET /company/employees/{employee_id}/:** Retrieve details of a specific employee.
-	- **Resutls:**
+	- **Result:**
 		```json
 		{
 			"id": 1,
