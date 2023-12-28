@@ -2,7 +2,22 @@ from rest_framework import serializers
 from .models import Department, Employee, Dependent
 
 
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ["id", "name"]
+
+
 class EmployeeSerializer(serializers.ModelSerializer):
+    department_name = serializers.StringRelatedField()
+
+    class Meta:
+        model = Employee
+        fields = ["id", "first_name", "last_name", "gender", "email", "department_name"]
+
+
+class EmployeeRetrieveSerializer(serializers.ModelSerializer):
+    department_name = serializers.StringRelatedField()
     dependents_count = serializers.IntegerField(read_only=True)
 
     class Meta:
@@ -12,19 +27,34 @@ class EmployeeSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "gender",
-            "email",
             "birth_date",
+            "email",
+            "salary",
+            "department_name",
+            "dependents_count",
+        ]
+
+
+class EmployeeCreateUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = [
+            "id",
+            "first_name",
+            "last_name",
+            "gender",
+            "birth_date",
+            "email",
             "salary",
             "department",
-            "dependents_count",
         ]
 
 
 class DependentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         employee_id = self.context["employee_id"]
-        relationship = self.validated_data["relationship"]
         employee = Employee.objects.get(pk=employee_id)
+        relationship = self.validated_data["relationship"]
 
         if employee.gender == "m":
             if relationship == "husband":
@@ -104,9 +134,3 @@ class UpdateDependentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dependent
         fields = ["name", "birth_date", "relationship"]
-
-
-class DepartmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Department
-        fields = ["id", "name"]
