@@ -57,7 +57,7 @@ The Company Database API allows users to interact with company-related data. It 
 
 ### Employee
 - **GET /company/employees/:** Retrieve a list of all employees.
-	- **Result:**
+	- **Sample:**
 		```json
 	 	[
 		    {
@@ -79,7 +79,7 @@ The Company Database API allows users to interact with company-related data. It 
 	 	]
  		```
 - **GET /company/employees/{employee_id}/:** Retrieve details of a specific employee.
-	- **Result:**
+	- **Sample:**
 		```json
 		{
 			"id": 1,
@@ -94,6 +94,20 @@ The Company Database API allows users to interact with company-related data. It 
 		}
 		```
 - **POST /company/employees/:** Add a new employee to the database.
+  	- **Sample:**
+  	  ```json
+	  {
+	    "first_name": "",
+	    "last_name": "",
+	    "gender": null,
+	    "birth_date": null,
+	    "email": "",
+	    "salary": null,
+	    "department": null
+	  }
+	  ```
+  	**Gender and Department are Choices Fields**
+   
 - **PUT /company/employees/{employee_id}/:** Update an existing employee's information.
 - **DELETE /company/employees/{employee_id}/:** Delete an employee from the database.
 
