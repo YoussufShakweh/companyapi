@@ -57,6 +57,27 @@ The Company Database API allows users to interact with company-related data. It 
 
 ### Employee
 - **GET /company/employees/:** Retrieve a list of all employees.
+	- **Result:**
+	```json
+ 	[
+	    {
+	        "id": 1,
+	        "first_name": "Youssuf",
+	        "last_name": "Shakweh",
+	        "gender": "m",
+	        "email": "youssuf@exmple.com",
+	        "department_name": "Back-End Developer"
+	    },
+	    {
+	        "id": 2,
+	        "first_name": "Muhannad",
+	        "last_name": "Alasfar",
+	        "gender": "m",
+	        "email": "muhannad@example.com",
+	        "department_name": "Front-End Developer"
+	    }
+ 	]
+ 	```
 - **GET /company/employees/{employee_id}/:** Retrieve details of a specific employee.
 - **POST /company/employees/:** Add a new employee to the database.
 - **PUT /company/employees/{employee_id}/:** Update an existing employee's information.
