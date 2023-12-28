@@ -88,7 +88,7 @@ The Company Database API allows users to interact with company-related data. It 
 	    "gender": "m",
 	    "birth_date": "2002-03-06",
 	    "email": "youssuf@exmple.com",
-	    "salary": "5500.00",
+	    "salary": 5500.00,
 	    "department_name": "Back-End Developer",
 	    "dependents_count": 0
 	}
