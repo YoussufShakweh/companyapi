@@ -58,41 +58,41 @@ The Company Database API allows users to interact with company-related data. It 
 ### Employee
 - **GET /company/employees/:** Retrieve a list of all employees.
 	- **Sample:**
-		```json
-	 	[
-		    {
-		        "id": 1,
-		        "first_name": "Youssuf",
-		        "last_name": "Shakweh",
-		        "gender": "m",
-		        "email": "youssuf@exmple.com",
-		        "department_name": "Back-End Developer"
-		    },
-		    {
-		        "id": 2,
-		        "first_name": "Muhannad",
-		        "last_name": "Alasfar",
-		        "gender": "m",
-		        "email": "muhannad@example.com",
-		        "department_name": "Front-End Developer"
-		    }
-	 	]
- 		```
+	```json
+	[
+	    {
+		"id": 1,
+		"first_name": "Youssuf",
+		"last_name": "Shakweh",
+		"gender": "m",
+		"email": "youssuf@exmple.com",
+		"department_name": "Back-End Developer"
+	    },
+	    {
+		"id": 2,
+		"first_name": "Muhannad",
+		"last_name": "Alasfar",
+		"gender": "m",
+		"email": "muhannad@example.com",
+		"department_name": "Front-End Developer"
+	    }
+	]
+	```
 - **GET /company/employees/{employee_id}/:** Retrieve details of a specific employee.
 	- **Sample:**
-		```json
-		{
-			"id": 1,
-			"first_name": "Youssuf",
-			"last_name": "Shakweh",
-			"gender": "m",
-			"birth_date": "2002-03-06",
-			"email": "youssuf@example.com",
-			"salary": 5500.00,
-			"department_name": "Back-End Developer",
-			"dependents_count": 0
-		}
-		```
+	```json
+ 	{
+	    "id": 1,
+	    "first_name": "Youssuf",
+	    "last_name": "Shakweh",
+	    "gender": "m",
+	    "birth_date": "2002-03-06",
+	    "email": "youssuf@exmple.com",
+	    "salary": "5500.00",
+	    "department_name": "Back-End Developer",
+	    "dependents_count": 0
+	}
+	```
 - **POST /company/employees/:** Add a new employee to the database.
   	- **Sample:**
   	  ```json
