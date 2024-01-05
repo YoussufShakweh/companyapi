@@ -53,85 +53,8 @@ The Company Database API allows users to interact with company-related data. It 
 	```
 3. Access the API endpoints via **http://localhost:8000**
 
-## API Endpoints
-
-### Employee
-- **GET /company/employees/:** Retrieve a list of all employees.
-	- **Sample:**
-	```json
-	[
-	    {
-		"id": 1,
-		"first_name": "Youssuf",
-		"last_name": "Shakweh",
-		"gender": "m",
-		"email": "youssuf@exmple.com",
-		"department_name": "Back-End Developer"
-	    },
-	    {
-		"id": 2,
-		"first_name": "Muhannad",
-		"last_name": "Alasfar",
-		"gender": "m",
-		"email": "muhannad@example.com",
-		"department_name": "Front-End Developer"
-	    }
-	]
-	```
-- **GET /company/employees/{employee_id}/:** Retrieve details of a specific employee.
-	- **Sample:**
-	```json
- 	{
-	    "id": 1,
-	    "first_name": "Youssuf",
-	    "last_name": "Shakweh",
-	    "gender": "m",
-	    "birth_date": "2002-03-06",
-	    "email": "youssuf@exmple.com",
-	    "salary": 5500.00,
-	    "department_name": "Back-End Developer",
-	    "dependents_count": 0
-	}
-	```
-- **POST /company/employees/:** Add a new employee to the database.
-  	- **Sample:**
-	```json
-	{
-	    "first_name": "",
-	    "last_name": "",
-	    "gender": null,
-	    "birth_date": null,
-	    "email": "",
-	    "salary": null,
-	    "department": null
-	}
-	 ```
-  	**Gender and Department are Choices Fields**
-   
-- **PUT /company/employees/{employee_id}/:** Update an existing employee's information.
-- **DELETE /company/employees/{employee_id}/:** Delete an employee from the database.
-
-**Note: When you delete an employee from the database, his dependents will also be deleted.**
-
-____
-
-### Department
-- **GET /company/departments/:** Retrieve a list of all departments.
-- **GET /company/departments/{department_id}/:** Retrieve details of a specific department.
-- **POST /company/departments/:** Create a new department.
-- **PUT /company/departments/{department_id}/:** Update department details.
-- **DELETE /company/departments/{department_id}/:** Delete a department.
-
-**Note: A department can be deleted only when there are no working employees within it.**
-
-____
-
-### Dependent
-- **GET /company/employees/{employee_id}/dependents/:** Retrieve a list of all dependents to this employee.
-- **GET /company/employees/{employee_id}/dependents/{dependent_id}/:** Retrieve details of a specific dependent.
-- **POST /company/employees/{employee_id}/dependents/:** Add new dependent to this employee.
-- **PUT /company/employees/{employee_id}/dependents/{dependent_id}/:** Update an existing dependent details.
-- **DELETE /company/employees/{employee_id}/dependents/{dependent_id}:** Delete a dependent from the database.
+## API Docs
+Will be available so soon.
 
 ## Contributing
 Contributions are welcome! If you find any issues or want to enhance the API, feel free to submit a pull request.
