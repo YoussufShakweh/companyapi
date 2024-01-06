@@ -15,6 +15,7 @@ from .serializers import (
 
 
 class DepartmentViewSet(ModelViewSet):
+    http_method_names = ["get", "post", "put", "delete"]
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
@@ -30,6 +31,7 @@ class DepartmentViewSet(ModelViewSet):
 
 
 class EmployeeViewSet(ModelViewSet):
+    http_method_names = ["get", "post", "put", "delete"]
     queryset = Employee.objects.annotate(
         department_name=F("department__name"), dependents_count=Count("dependents")
     ).all()
