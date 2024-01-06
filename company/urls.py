@@ -34,7 +34,9 @@ urlpatterns = (
     + employees_router.urls
     + [
         path(
-            "docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
+            "docs/",
+            schema_view.with_ui("swagger", cache_timeout=0),
+            name="schema-redoc",
         ),
     ]
 )
