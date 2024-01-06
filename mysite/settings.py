@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "debug_toolbar",
     "rest_framework",
+    "drf_yasg",
     "company",
 ]
 
@@ -138,4 +139,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
 }
-
