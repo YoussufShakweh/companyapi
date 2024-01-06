@@ -54,7 +54,7 @@ The Company Database API allows users to interact with company-related data. It 
 3. Access the API endpoints via **http://localhost:8000**
 
 ## API Docs
-Will be available so soon.
+You can access the API docs via **http://localhost:8000/company/docs**.
 
 ## Contributing
 Contributions are welcome! If you find any issues or want to enhance the API, feel free to submit a pull request.
