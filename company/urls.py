@@ -29,6 +29,12 @@ employees_router.register(
     "dependents", views.DependentViewSet, basename="employee-dependents"
 )
 # ----------------------------------------------------------------------------- #
-urlpatterns = router.urls + employees_router.urls + [
-    path("docs/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-redoc"),
-]
+urlpatterns = (
+    router.urls
+    + employees_router.urls
+    + [
+        path(
+            "docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
+        ),
+    ]
+)
