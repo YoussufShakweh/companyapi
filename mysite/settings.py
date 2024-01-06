@@ -87,9 +87,9 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "your_database",
-        "USER": "your_user",
-        "PASSWORD": "your_pass",
+        "NAME": "dd",
+        "USER": "uu",
+        "PASSWORD": "pp",
         "HOST": "localhost",
         "PORT": "3306",
     }
@@ -139,4 +139,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
+}
+
+SWAGGER_SETTINGS = {
+    "DEFAULT_AUTO_SCHEMA_CLASS": "mysite.swagger.CompoundTagsSchema",
 }
