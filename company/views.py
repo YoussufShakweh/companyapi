@@ -3,6 +3,7 @@ from django.db.models.aggregates import Count
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from .models import Employee, Department, Dependent
 from .serializers import (
@@ -20,6 +21,32 @@ class DepartmentViewSet(ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
+    @swagger_auto_schema(operation_summary="Retrieve a list of departments.")
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(operation_summary="Add a new department.")
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve details of a department.",
+        responses={200: DepartmentSerializer, 404: "Not found."},
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update details of an existing department.",
+        responses={200: DepartmentSerializer, 404: "Not found."},
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete an existing department.",
+        responses={204: "No content.", 404: "Not found."},
+    )
     def destroy(self, request, *args, **kwargs):
         if Employee.objects.filter(department_id=kwargs["pk"]).exists():
             return Response(
@@ -65,6 +92,15 @@ class DependentViewSet(ModelViewSet):
         operation_summary="Add a new dependent.",
         operation_description="Add a new dependent associated with an employee.",
         request_body=DependentSerializer,
+        manual_parameters=[
+            openapi.Parameter(
+                name="employee_pk",
+                in_=openapi.IN_PATH,
+                description="unique identifier for the employee",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
     )
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
@@ -72,6 +108,15 @@ class DependentViewSet(ModelViewSet):
     @swagger_auto_schema(
         operation_summary="Retrieve a list of dependents.",
         operation_description="Retrieve list of all dependents associated with an employee.",
+        manual_parameters=[
+            openapi.Parameter(
+                name="employee_pk",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Employee",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            )
+        ],
         responses={
             200: DependentSerializer,
             404: "Employee not found.",
@@ -83,6 +128,22 @@ class DependentViewSet(ModelViewSet):
     @swagger_auto_schema(
         operation_summary="Retrieve details of a dependent.",
         operation_description="Retrieve details of a dependent associated with an employee.",
+        manual_parameters=[
+            openapi.Parameter(
+                name="employee_pk",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Employee",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+            openapi.Parameter(
+                name="id",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Dependent",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
         responses={
             200: DependentSerializer,
             404: "Not found.",
@@ -94,6 +155,22 @@ class DependentViewSet(ModelViewSet):
     @swagger_auto_schema(
         operation_summary="Update details of a dependents.",
         operation_description="Update details of a dependent associated with an employee.",
+        manual_parameters=[
+            openapi.Parameter(
+                name="employee_pk",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Employee",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+            openapi.Parameter(
+                name="id",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Dependent",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
         request_body=DependentUpdateSerializer,
         responses={
             200: DependentUpdateSerializer,
@@ -106,6 +183,22 @@ class DependentViewSet(ModelViewSet):
     @swagger_auto_schema(
         operation_summary="Delete a dependent.",
         operation_description="Delete a dependent associated with an employee.",
+        manual_parameters=[
+            openapi.Parameter(
+                name="employee_pk",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Employee",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+            openapi.Parameter(
+                name="id",
+                in_=openapi.IN_PATH,
+                description="Unique Identifier For The Dependent",
+                required=True,
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
         responses={
             204: "No content.",
             404: "Not found.",
