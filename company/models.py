@@ -20,7 +20,6 @@ class Employee(models.Model):
     gender = models.CharField(
         max_length=1,
         choices=GENDER_CHOICES,
-        default=GENDER_CHOICE_MALE,
     )
     email = models.EmailField(unique=True)
     birth_date = models.DateField()
@@ -47,7 +46,6 @@ class Dependent(models.Model):
     gender = models.CharField(
         max_length=1,
         choices=GENDER_CHOICES,
-        default=GENDER_CHOICE_MALE,
     )
     birth_date = models.DateField()
     RELATIONSHIP_CHOICE_HUSBAND = "husband"
