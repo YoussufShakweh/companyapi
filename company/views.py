@@ -3,7 +3,6 @@ from django.db.models.aggregates import Count
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from .models import Employee, Department, Dependent
 from .serializers import (
@@ -63,52 +62,54 @@ class DependentViewSet(ModelViewSet):
         return Dependent.objects.filter(employee_id=self.kwargs["employee_pk"])
 
     @swagger_auto_schema(
+        operation_summary="Add a new dependent.",
+        operation_description="Add a new dependent associated with an employee.",
+        request_body=DependentSerializer,
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
         operation_summary="Retrieve a list of dependents.",
         operation_description="Retrieve list of all dependents associated with an employee.",
         responses={
-            200: openapi.Response(
-                description="List of dependents.",
-                schema=openapi.Schema(
-                    title="Dependent",
-                    type=openapi.TYPE_ARRAY,
-                    items=openapi.Schema(
-                        type=openapi.TYPE_OBJECT,
-                        properties={
-                            "id": openapi.Schema(
-                                title="ID",
-                                type=openapi.TYPE_INTEGER,
-                                read_only=True,
-                            ),
-                            "name": openapi.Schema(
-                                title="Name",
-                                type=openapi.TYPE_STRING,
-                                max_length=150,
-                                min_length=1,
-                            ),
-                            "gender": openapi.Schema(
-                                title="Gender",
-                                type=openapi.TYPE_STRING,
-                                read_only=True,
-                                enum=["m", "f"],
-                                default="m",
-                            ),
-                            "birth_date": openapi.Schema(
-                                title="Birth date",
-                                type=openapi.TYPE_STRING,
-                                format="date",
-                            ),
-                            "relationship": openapi.Schema(
-                                title="Relationship",
-                                type=openapi.TYPE_STRING,
-                                enum=["husband", "wife", "son", "daugther"],
-                            ),
-                        },
-                        required=["name", "birth_date", "relationship"],
-                    ),
-                ),
-            ),
+            200: DependentSerializer,
             404: "Employee not found.",
         },
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve details of a dependent.",
+        operation_description="Retrieve details of a dependent associated with an employee.",
+        responses={
+            200: DependentSerializer,
+            404: "Not found.",
+        },
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update details of a dependents.",
+        operation_description="Update details of a dependent associated with an employee.",
+        request_body=DependentUpdateSerializer,
+        responses={
+            200: DependentUpdateSerializer,
+            404: "Not found.",
+        },
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a dependent.",
+        operation_description="Delete a dependent associated with an employee.",
+        responses={
+            204: "No content.",
+            404: "Not found.",
+        },
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
