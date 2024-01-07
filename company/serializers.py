@@ -94,7 +94,7 @@ class DependentSerializer(serializers.ModelSerializer):
         read_only_fields = ["gender"]
 
 
-class UpdateDependentSerializer(serializers.ModelSerializer):
+class DependentUpdateSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         employee_id = self.context["employee_id"]
         relationship = self.validated_data["relationship"]
