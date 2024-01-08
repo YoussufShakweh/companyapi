@@ -1,3 +1,4 @@
+from django.utils.timezone import now
 from rest_framework import serializers
 from .models import Department, Employee, Dependent
 
@@ -6,6 +7,44 @@ class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = ["id", "name"]
+
+
+class DepartmentUpdateSerializer(serializers.ModelSerializer):
+    def validate(self, data):
+        manager = data.get("manager")
+        if manager is not None:
+            if manager.department != self.instance:
+                raise serializers.ValidationError(
+                    "Employee not allowed to manager of a department that he does not work in."
+                )
+            if manager != self.instance.manager:
+                self.instance.management_start_date = now().date()
+        else:
+            self.instance.management_start_date = None
+        return data
+
+    class Meta:
+        model = Department
+        fields = ["name", "manager"]
+
+
+class SimpleEmployeeSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+
+    def get_full_name(self, employee: Employee):
+        return f"{employee.first_name} {employee.last_name}"
+
+    class Meta:
+        model = Employee
+        fields = ["id", "full_name", "email"]
+
+
+class DepartmentRetrieveSerializer(serializers.ModelSerializer):
+    manager = SimpleEmployeeSerializer()
+
+    class Meta:
+        model = Department
+        fields = ["id", "name", "manager", "management_start_date"]
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
