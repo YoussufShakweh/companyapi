@@ -11,6 +11,8 @@ from .serializers import (
     EmployeeCreateUpdateSerializer,
     EmployeeRetrieveSerializer,
     DepartmentSerializer,
+    DepartmentRetrieveSerializer,
+    DepartmentUpdateSerializer,
     DependentSerializer,
     DependentUpdateSerializer,
 )
@@ -19,7 +21,14 @@ from .serializers import (
 class DepartmentViewSet(ModelViewSet):
     http_method_names = ["get", "post", "put", "delete"]
     queryset = Department.objects.all()
-    serializer_class = DepartmentSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "PUT":
+            return DepartmentUpdateSerializer
+        elif self.request.method == "GET" and self.action != "list":
+            return DepartmentRetrieveSerializer
+        else:
+            return DepartmentSerializer
 
     @swagger_auto_schema(operation_summary="Retrieve a list of departments.")
     def list(self, request, *args, **kwargs):
@@ -31,14 +40,15 @@ class DepartmentViewSet(ModelViewSet):
 
     @swagger_auto_schema(
         operation_summary="Retrieve details of an existing department.",
-        responses={200: DepartmentSerializer, 404: "Not found."},
+        responses={200: DepartmentRetrieveSerializer, 404: "Not found."},
     )
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
     @swagger_auto_schema(
         operation_summary="Update details of an existing department.",
-        responses={200: DepartmentSerializer, 404: "Not found."},
+        request_body=DepartmentUpdateSerializer,
+        responses={200: DepartmentUpdateSerializer, 404: "Not found."},
     )
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
