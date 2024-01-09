@@ -8,7 +8,7 @@ from . import views
 schema_view = get_schema_view(
     openapi.Info(
         title="Company Database API Documentation",
-        default_version="v1",
+        default_version="v1.1",
         license=openapi.License(name="BSD License"),
     ),
     public=True,
