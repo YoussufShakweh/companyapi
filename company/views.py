@@ -1,5 +1,6 @@
 from django.db.models import F
 from django.db.models.aggregates import Count
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -16,6 +17,7 @@ from .serializers import (
     DependentSerializer,
     DependentUpdateSerializer,
 )
+from .filters import EmployeeFilter, EmployeeSearchFilter
 
 
 class DepartmentViewSet(ModelViewSet):
@@ -73,6 +75,9 @@ class EmployeeViewSet(ModelViewSet):
     queryset = Employee.objects.annotate(
         department_name=F("department__name"), dependents_count=Count("dependents")
     ).all()
+    filter_backends = [DjangoFilterBackend, EmployeeSearchFilter]
+    filterset_class = EmployeeFilter
+    search_fields = ["department_name"]
 
     def get_serializer_class(self):
         if self.request.method in ["POST", "PUT"]:
