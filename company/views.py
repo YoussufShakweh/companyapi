@@ -77,7 +77,7 @@ class EmployeeViewSet(ModelViewSet):
     ).all()
     filter_backends = [DjangoFilterBackend, EmployeeSearchFilter]
     filterset_class = EmployeeFilter
-    search_fields = ["department_name"]
+    search_fields = ["first_name", "last_name"]
 
     def get_serializer_class(self):
         if self.request.method in ["POST", "PUT"]:
