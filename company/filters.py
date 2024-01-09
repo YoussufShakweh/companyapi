@@ -6,9 +6,11 @@ from .models import Employee
 class EmployeeFilter(FilterSet):
     class Meta:
         model = Employee
-        fields = {"gender": ["exact"]}
+        fields = {
+            "department__name": ["iexact"],
+            "gender": ["exact"],
+        }
 
 
 class EmployeeSearchFilter(SearchFilter):
-    search_param = "department_name"
-    search_description = "A search field depends on department name"
+    search_description = "A search field depends on employee's full name"
