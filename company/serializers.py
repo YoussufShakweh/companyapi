@@ -3,6 +3,17 @@ from rest_framework import serializers
 from .models import Department, Employee, Dependent
 
 
+class SimpleEmployeeSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+
+    def get_full_name(self, employee: Employee):
+        return f"{employee.first_name} {employee.last_name}"
+
+    class Meta:
+        model = Employee
+        fields = ["id", "full_name", "email"]
+
+
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
@@ -15,28 +26,18 @@ class DepartmentUpdateSerializer(serializers.ModelSerializer):
         if manager is not None:
             if manager.department != self.instance:
                 raise serializers.ValidationError(
-                    "Employee not allowed to manager of a department that he does not work in."
+                    "Employee not allowed to be manager of a department that he does not work in."
                 )
             if manager != self.instance.manager:
                 self.instance.management_start_date = now().date()
         else:
             self.instance.management_start_date = None
+
         return data
 
     class Meta:
         model = Department
         fields = ["name", "manager"]
-
-
-class SimpleEmployeeSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
-
-    def get_full_name(self, employee: Employee):
-        return f"{employee.first_name} {employee.last_name}"
-
-    class Meta:
-        model = Employee
-        fields = ["id", "full_name", "email"]
 
 
 class DepartmentRetrieveSerializer(serializers.ModelSerializer):
@@ -48,15 +49,15 @@ class DepartmentRetrieveSerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    department_name = serializers.StringRelatedField()
+    department = serializers.StringRelatedField()
 
     class Meta:
         model = Employee
-        fields = ["id", "first_name", "last_name", "gender", "email", "department_name"]
+        fields = ["id", "first_name", "last_name", "gender", "email", "department"]
 
 
 class EmployeeRetrieveSerializer(serializers.ModelSerializer):
-    department_name = serializers.StringRelatedField()
+    department = serializers.StringRelatedField()
     dependents_count = serializers.IntegerField(read_only=True)
 
     class Meta:
@@ -69,12 +70,16 @@ class EmployeeRetrieveSerializer(serializers.ModelSerializer):
             "birth_date",
             "email",
             "salary",
-            "department_name",
+            "department",
             "dependents_count",
         ]
 
 
 class EmployeeCreateUpdateSerializer(serializers.ModelSerializer):
+    department = serializers.SlugRelatedField(
+        slug_field="name", queryset=Department.objects.all(), read_only=False
+    )
+
     class Meta:
         model = Employee
         fields = [
