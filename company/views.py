@@ -1,9 +1,9 @@
-from django.db.models import F
 from django.db.models.aggregates import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.filters import OrderingFilter
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from .models import Employee, Dependent, Department
@@ -18,6 +18,7 @@ from .serializers import (
     DependentUpdateSerializer,
 )
 from .filters import EmployeeFilter, EmployeeSearchFilter
+from .pagination import EmployeePagination
 
 
 class DepartmentViewSet(ModelViewSet):
@@ -72,12 +73,16 @@ class DepartmentViewSet(ModelViewSet):
 
 class EmployeeViewSet(ModelViewSet):
     http_method_names = ["get", "post", "put", "delete"]
-    queryset = Employee.objects.annotate(
-        department_name=F("department__name"), dependents_count=Count("dependents")
-    ).all()
-    filter_backends = [DjangoFilterBackend, EmployeeSearchFilter]
+    queryset = (
+        Employee.objects.select_related("department")
+        .annotate(dependents_count=Count("dependents"))
+        .all()
+    )
+    filter_backends = [DjangoFilterBackend, EmployeeSearchFilter, OrderingFilter]
     filterset_class = EmployeeFilter
     search_fields = ["first_name", "last_name"]
+    pagination_class = EmployeePagination
+    ordering_fields = ["first_name", "last_name"]
 
     def get_serializer_class(self):
         if self.request.method in ["POST", "PUT"]:
